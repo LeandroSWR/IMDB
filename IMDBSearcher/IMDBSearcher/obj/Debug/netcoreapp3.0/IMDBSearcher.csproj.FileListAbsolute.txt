@@ -9,3 +9,14 @@ C:\Users\GamingMachine\Desktop\IMDB Search\IMDBSearcher\IMDBSearcher\bin\Debug\n
 C:\Users\GamingMachine\Desktop\IMDB Search\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.pdb
 C:\Users\GamingMachine\Desktop\IMDB Search\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.dll
 C:\Users\GamingMachine\Desktop\IMDB Search\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.pdb
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.exe
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.deps.json
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.runtimeconfig.json
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.runtimeconfig.dev.json
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.dll
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\bin\Debug\netcoreapp3.0\IMDBSearcher.pdb
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.csprojAssemblyReference.cache
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.AssemblyInfoInputs.cache
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.AssemblyInfo.cs
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.dll
+C:\Users\Shadow\Desktop\IMDB\IMDBSearcher\IMDBSearcher\obj\Debug\netcoreapp3.0\IMDBSearcher.pdb

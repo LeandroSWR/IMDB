@@ -29,6 +29,12 @@ namespace IMDBSearcher
         // The key pressed by the user
         private ConsoleKey pressedKey;
 
+        // String to save the current input of the user
+        private string userInput;
+
+        // A readonly stringof what the user needs to write if he wants to go back
+        private readonly string backString;
+
         /// <summary>
         /// Constructor for our Search Settings
         /// </summary>
@@ -40,6 +46,9 @@ namespace IMDBSearcher
 
             // Initialize the People Filters
             PFilters = new PeopleFilters();
+
+            // Initialize the string to go back
+            backString = "back";
 
             // Initialize our menu variable with the recieve value
             this.menu = menu;
@@ -436,12 +445,96 @@ namespace IMDBSearcher
                 // Asks for the MainProfessions
                 case ConsoleKey.D4:
 
-                    //                                                              //
-                    // !!!!!!!!!!!!!!MISSING THE CODE FOR PROFFESSIONS!!!!!!!!!!!!!!//
-                    //                                                              //
+                    // How many professions the user wants (No limit)
+                    byte numProfessions;
 
-                    // Clears the console
-                    Console.Clear();
+                    // Run the cycle
+                    do
+                    {
+                        // Clears the console
+                        Console.Clear();
+
+                        // Ask for the user to input the year of birth
+                        Console.WriteLine("How many professions do you want to filter?");
+
+                        // If we can't parse the string into a ushort
+                        if (!Byte.TryParse(Console.ReadLine(), out numProfessions))
+                            // Display an invalid input error
+                            menu.InvalidInputErrorDisplay();
+
+                        // Untill the user inputs a valid year
+                    } while (numProfessions <= 0 && numProfessions > 32);
+
+                    // Type of profession chosen by the user
+                    PrimaryProfessions?[] professions = new PrimaryProfessions?[numProfessions];
+
+                    // Current chosen Profession
+                    PrimaryProfessions chosenProfession;
+
+                    // Loop the ammout of times the user chose
+                    int i = 1;
+
+                    // Loops..
+                    do
+                    {
+                        // Clears the console
+                        Console.Clear();
+
+                        // Ask for the type of title
+                        Console.WriteLine("List of Professions: \nactor, actress, " +
+                            "cinematographer, composer, director, \neditor, executive, " +
+                            "miscellaneous, producer, soundtrack, \nstunts, writer, " +
+                            "animation_department, art_department, \nart_director, " +
+                            "assistant_director, camera_department, \ncasting_department, " +
+                            "casting_director, costume_department, \ncostume_designer, " +
+                            "editorial_department, make_up_department, \nmusic_department, " +
+                            "production_designer, production_manager, \nset_decorator, " +
+                            "sound_department, special_effects, \ntransportation_department, " +
+                            "visual_effects, location_management");
+                        Console.WriteLine($"\n('back' to return) Input the Profession you want: ({i}/{numProfessions})");
+
+                        // If the parse was successful
+                        if (Enum.TryParse((userInput = Console.ReadLine()), out chosenProfession))
+                        {
+                            // Verify if the chosen profession had already been chosen before
+                            for (int a = 0; a < professions.Length; a++)
+                            {
+                                // If so...
+                                if (professions[a] != null && professions[a] == chosenProfession)
+                                {
+                                    // Display an invalid input error
+                                    menu.InvalidInputErrorDisplay();
+                                    break;
+                                }
+
+
+                                if (professions[a] == null)
+                                {
+
+                                    // Had the chosen genre to our array
+                                    professions[a] = chosenProfession;
+
+                                    // Increment the i variable
+                                    i++;
+                                    break;
+                                }
+                            }
+                        }
+                        else if (userInput == backString)
+                        {
+                            // Display an invalid input error
+                            menu.InvalidInputErrorDisplay();
+                        }
+
+                        // Until the user chooses all valid options
+                    } while (i <= numProfessions || userInput != backString);
+
+                    // Set the values in a new filter struct
+                    PFilters = new PeopleFilters(
+                        PFilters.Name,
+                        PFilters.BirthYear,
+                        PFilters.DeathYear,
+                        professions);
 
                     break;
 

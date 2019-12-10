@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\GamingMachine\\Desktop\\IMDB Search\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj": {}
+    "C:\\Users\\Shadow\\Desktop\\IMDB\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj": {}
   },
   "projects": {
-    "C:\\Users\\GamingMachine\\Desktop\\IMDB Search\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj": {
+    "C:\\Users\\Shadow\\Desktop\\IMDB\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\GamingMachine\\Desktop\\IMDB Search\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj",
+        "projectUniqueName": "C:\\Users\\Shadow\\Desktop\\IMDB\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj",
         "projectName": "IMDBSearcher",
-        "projectPath": "C:\\Users\\GamingMachine\\Desktop\\IMDB Search\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj",
-        "packagesPath": "C:\\Users\\GamingMachine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\GamingMachine\\Desktop\\IMDB Search\\IMDBSearcher\\IMDBSearcher\\obj\\",
+        "projectPath": "C:\\Users\\Shadow\\Desktop\\IMDB\\IMDBSearcher\\IMDBSearcher\\IMDBSearcher.csproj",
+        "packagesPath": "C:\\Users\\Shadow\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Shadow\\Desktop\\IMDB\\IMDBSearcher\\IMDBSearcher\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\GamingMachine\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Shadow\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

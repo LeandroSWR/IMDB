@@ -43,10 +43,10 @@ namespace IMDBSearcher
         private readonly string name;
         private readonly ushort? birthYear;
         private readonly ushort? deathYear;
-        private readonly string[] mainProfessions;
+        private readonly PrimaryProfessions?[] mainProfessions;
 
         public PeopleFilters(string name, ushort? birthYear, ushort? deathYear,
-            string[] mainProfessions) : this()
+            PrimaryProfessions?[] mainProfessions) : this()
         {
             this.name = name;
             this.birthYear = birthYear;
@@ -57,6 +57,6 @@ namespace IMDBSearcher
         public string Name { get => name; }
         public ushort? BirthYear { get => birthYear; }
         public ushort? DeathYear { get => deathYear; }
-        public string[] MainProfessions { get => mainProfessions; }
+        public PrimaryProfessions?[] MainProfessions { get => mainProfessions; }
     }
 }
