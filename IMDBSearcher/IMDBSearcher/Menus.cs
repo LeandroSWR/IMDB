@@ -15,6 +15,27 @@ namespace IMDBSearcher
         // Declare an Instance for the Search Settings
         private SearchSettings searchSettings;
 
+        // Variable that works as a table of NameBasics from a db with a single key
+        private ImdbTable nameBasics;
+
+        // Variable that works as a table of TitleAkas from a db with a single key
+        private ImdbTable titleAkas;
+
+        // Variable that works as a table of TitleBasics from a db with a single key
+        private ImdbTable titleBasics;
+
+        // Variable that works as a table of TitleCrew from a db with a single key
+        private ImdbTable titleCrew;
+
+        // Variable that works as a table of TitleEpisode from a db with a single key
+        private ImdbTable titleEpisode;
+
+        // Variable that works as a table of TitlePrincipals from a db with a single key
+        private ImdbTable titlePrincipals;
+
+        // Variable that works as a table of TitleRatings from a db with a single key
+        private ImdbTable titleRatings;
+
         /// <summary>
         /// The Class Empty Constructor
         /// </summary>
@@ -145,6 +166,31 @@ namespace IMDBSearcher
 
             // Save what the user wants to search for
             searchString = Console.ReadLine();
+
+            switch(searchSettings.SearchType)
+            {
+                case SearchType.Titles:
+                    titleAkas = new ImdbTable();
+
+                    if (searchSettings.TOrderBy == TitlesOrderBy.Classification)
+                    {
+
+                    }
+
+                    titleAkas.FillList(Constants.filleTitleAkas, searchSettings.TFilters, ref searchString);
+
+                    foreach (TitleAkas ta in titleAkas)
+                    {
+                        Console.WriteLine(ta.Title);
+                        Console.ReadLine();
+                    }
+                    break;
+                case SearchType.People:
+
+                    break;
+            }
+
+            Console.ReadLine();
         }
 
         
