@@ -26,8 +26,8 @@ namespace IMDBSearcher
         public void FillList(string filePath, IIsFilter filter, ref string searchString)
         {
             byte b = 0;
-            //try
-            //{
+            try
+            {
                 using (FileStream reader = File.OpenRead(Path.Combine(folderWithFiles, filePath)))
                 {
                     using (GZipStream zip = new GZipStream(reader, CompressionMode.Decompress, true))
@@ -45,11 +45,11 @@ namespace IMDBSearcher
                         }
                     }
                 }
-            //} catch (Exception e)
-            //{
-            //    Console.WriteLine($"\nError: {e.Message}");
-            //    Console.ReadLine();
-            //}
+            } catch (Exception e)
+            {
+                Console.WriteLine($"\nError: {e.Message}");
+                Console.ReadLine();
+            }
         }
 
         private void SaveFileData(IIsFilter filter, ref string searchString, ref string filePath)

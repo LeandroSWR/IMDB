@@ -19,7 +19,7 @@ namespace IMDBSearcher
         private ImdbTable nameBasics;
 
         // Variable that works as a table of TitleAkas from a db with a single key
-        private ImdbTable titleAkas;
+        public ImdbTable titleAkas { get; private set; }
 
         // Variable that works as a table of TitleBasics from a db with a single key
         private ImdbTable titleBasics;
@@ -172,17 +172,11 @@ namespace IMDBSearcher
                 case SearchType.Titles:
                     titleAkas = new ImdbTable();
 
-                    if (searchSettings.TOrderBy == TitlesOrderBy.Classification)
-                    {
-
-                    }
-
                     titleAkas.FillList(Constants.filleTitleAkas, searchSettings.TFilters, ref searchString);
 
                     foreach (TitleAkas ta in titleAkas)
                     {
                         Console.WriteLine(ta.Title);
-                        Console.ReadLine();
                     }
                     break;
                 case SearchType.People:
