@@ -9,9 +9,6 @@ namespace IMDBSearcher
         // Declare an Instance for the Menus
         Menus menu;
 
-        // What type of search it is (Titles or People)
-        public SearchType SearchType { get; set; }
-
         // What to order by if we're searching for Titles
         private TitlesOrderBy tOrderBy;
         public TitlesOrderBy TOrderBy { get => tOrderBy; }
@@ -22,9 +19,6 @@ namespace IMDBSearcher
 
         // Filters if we're searching for Titles
         public TitleFilters TFilters { get; private set; }
-
-        // Filters if we're searching for People
-        public PeopleFilters PFilters { get; private set; }
 
         // The key pressed by the user
         private ConsoleKey pressedKey;
@@ -44,9 +38,6 @@ namespace IMDBSearcher
             // Initialize the Title Filters
             TFilters = new TitleFilters();
 
-            // Initialize the People Filters
-            PFilters = new PeopleFilters();
-
             // Initialize the string to go back
             backString = "back";
 
@@ -63,33 +54,15 @@ namespace IMDBSearcher
             // Clears the Console
             Console.Clear();
 
-            switch (SearchType)
+            // Ask the user to define what he want's to search for
+            Console.WriteLine("Order by? (Type, PrimaryTitle, IsAdult, " +
+                "BeginingDate, EndDate, Classification)");
+
+            // Try to parse the inpunt into an Enum type
+            if (!Enum.TryParse(Console.ReadLine(), out tOrderBy))
             {
-                case SearchType.Titles:
-
-                    // Ask the user to define what he want's to search for
-                    Console.WriteLine("Order by? (Type, PrimaryTitle, IsAdult, " +
-                        "BeginingDate, EndDate, Classification)");
-
-                    // Try to parse the inpunt into an Enum type
-                    if (!Enum.TryParse(Console.ReadLine(), out tOrderBy))
-                    {
-                        menu.InvalidInputErrorDisplay();
-                        SetSearchParameters();
-                    }
-                    break;
-                case SearchType.People:
-
-                    // Ask the user to define what he want's to search for
-                    Console.WriteLine("Order by? (Name, BirthYear, DeathYear)");
-
-                    // Try to parse the inpunt into an Enum type
-                    if (!Enum.TryParse(Console.ReadLine(), out pOrderBy))
-                    {
-                        menu.InvalidInputErrorDisplay();
-                        SetSearchParameters();
-                    }
-                    break;
+                menu.InvalidInputErrorDisplay();
+                SetSearchParameters();
             }
 
             // Space between the last request and the new
@@ -339,206 +312,6 @@ namespace IMDBSearcher
                     break;
 
                     // If we chose continue
-                case ConsoleKey.D0:
-
-                    // Returns to the previous menu to search
-                    return;
-
-                // Display an invalid input error
-                default:
-
-                    // Display an input error
-                    menu.InvalidInputErrorDisplay();
-                    break;
-            }
-
-            // Display the filter selection again
-            menu.AskForSearchFilters();
-        }
-
-        /// <summary>
-        /// Set's all the filters for People Search based on user input
-        /// </summary>
-        public void SetPeopleFilters()
-        {
-            switch (Console.ReadKey().Key)
-            {
-                // Asks fot the name
-                case ConsoleKey.D1:
-
-                    // Clears the console
-                    Console.Clear();
-
-                    // Ask for the name
-                    Console.WriteLine("Write the Name:");
-
-                    // Set the values in a new filter struct
-                    PFilters = new PeopleFilters(
-                        Console.ReadLine(),
-                        PFilters.BirthYear,
-                        PFilters.DeathYear,
-                        PFilters.MainProfessions);
-                    break;
-
-                // Asks for the year of birth
-                case ConsoleKey.D2:
-                    // What year the person was born in
-                    ushort bYear = 0;
-
-                    // Run the cycle
-                    do
-                    {
-                        // Clears the console
-                        Console.Clear();
-
-                        // Ask for the user to input the year of birth
-                        Console.WriteLine("Input the year of birth: (1800 - 2019)");
-
-                        // If we can't parse the string into a ushort
-                        if (!UInt16.TryParse(Console.ReadLine(), out bYear) ||
-                            bYear < 1800 || bYear > 2019)
-                            // Display an invalid input error
-                            menu.InvalidInputErrorDisplay();
-
-                        // Untill the user inputs a valid year
-                    } while (bYear < 1800 || bYear > 2019);
-
-                    // Set the values in a new filter struct
-                    PFilters = new PeopleFilters(
-                        PFilters.Name,
-                        bYear,
-                        PFilters.DeathYear,
-                        PFilters.MainProfessions);
-                    break;
-
-                // Asks for the year of death
-                case ConsoleKey.D3:
-                    // What year the person was born in
-                    ushort dYear = 0;
-
-                    // Run the cycle
-                    do
-                    {
-                        // Clears the console
-                        Console.Clear();
-
-                        // Ask for the user to input the year of death
-                        Console.WriteLine("Input the year of death: (1800 - 2019)");
-
-                        // If we can't parse the string into a ushort
-                        if (!UInt16.TryParse(Console.ReadLine(), out dYear) ||
-                            dYear < 1800 || dYear > 2019)
-                            // Display an invalid input error
-                            menu.InvalidInputErrorDisplay();
-
-                        // Untill the user inputs a valid year
-                    } while (dYear < 1800 || dYear > 2019);
-
-                    // Set the values in a new filter struct
-                    PFilters = new PeopleFilters(
-                        PFilters.Name,
-                        PFilters.BirthYear,
-                        dYear,
-                        PFilters.MainProfessions);
-                    break;
-
-                // Asks for the MainProfessions
-                case ConsoleKey.D4:
-
-                    // How many professions the user wants (No limit)
-                    byte numProfessions;
-
-                    // Run the cycle
-                    do
-                    {
-                        // Clears the console
-                        Console.Clear();
-
-                        // Ask for the user to input the year of birth
-                        Console.WriteLine("How many professions do you want to filter?");
-
-                        // If we can't parse the string into a ushort
-                        if (!Byte.TryParse(Console.ReadLine(), out numProfessions))
-                            // Display an invalid input error
-                            menu.InvalidInputErrorDisplay();
-
-                        // Untill the user inputs a valid year
-                    } while (numProfessions <= 0 && numProfessions > 32);
-
-                    // Type of profession chosen by the user
-                    PrimaryProfessions?[] professions = new PrimaryProfessions?[numProfessions];
-
-                    // Current chosen Profession
-                    PrimaryProfessions chosenProfession;
-
-                    // Loop the ammout of times the user chose
-                    int i = 1;
-
-                    // Loops..
-                    do
-                    {
-                        // Clears the console
-                        Console.Clear();
-
-                        // Ask for the type of title
-                        Console.WriteLine("List of Professions: \nactor, actress, " +
-                            "cinematographer, composer, director, \neditor, executive, " +
-                            "miscellaneous, producer, soundtrack, \nstunts, writer, " +
-                            "animation_department, art_department, \nart_director, " +
-                            "assistant_director, camera_department, \ncasting_department, " +
-                            "casting_director, costume_department, \ncostume_designer, " +
-                            "editorial_department, make_up_department, \nmusic_department, " +
-                            "production_designer, production_manager, \nset_decorator, " +
-                            "sound_department, special_effects, \ntransportation_department, " +
-                            "visual_effects, location_management");
-                        Console.WriteLine($"\n('back' to return) Input the Profession you want: ({i}/{numProfessions})");
-
-                        // If the parse was successful
-                        if (Enum.TryParse((userInput = Console.ReadLine()), out chosenProfession))
-                        {
-                            // Verify if the chosen profession had already been chosen before
-                            for (int a = 0; a < professions.Length; a++)
-                            {
-                                // If so...
-                                if (professions[a] != null && professions[a] == chosenProfession)
-                                {
-                                    // Display an invalid input error
-                                    menu.InvalidInputErrorDisplay();
-                                    break;
-                                }
-
-
-                                if (professions[a] == null)
-                                {
-
-                                    // Had the chosen genre to our array
-                                    professions[a] = chosenProfession;
-
-                                    // Increment the i variable
-                                    i++;
-                                    break;
-                                }
-                            }
-                        }
-                        else if (userInput == backString)
-                        {
-                            // Display an invalid input error
-                            menu.InvalidInputErrorDisplay();
-                        }
-
-                        // Until the user chooses all valid options
-                    } while (i <= numProfessions || userInput != backString);
-
-                    // Set the values in a new filter struct
-                    PFilters = new PeopleFilters(
-                        PFilters.Name,
-                        PFilters.BirthYear,
-                        PFilters.DeathYear,
-                        professions);
-
-                    break;
-
-                // If we chose continue
                 case ConsoleKey.D0:
 
                     // Returns to the previous menu to search

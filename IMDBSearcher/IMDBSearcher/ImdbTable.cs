@@ -66,8 +66,7 @@ namespace IMDBSearcher
                         currentLine[5].Split(" ")));
                     break;
                 case Constants.filleTitleAkas:
-                    if (currentLine[2].Contains(searchString, StringComparison.InvariantCultureIgnoreCase))
-                    {
+                    
                         Add(new TitleAkas(
                         currentLine[0],
                         currentLine[1],
@@ -77,9 +76,10 @@ namespace IMDBSearcher
                         currentLine[5].Split(" ", StringSplitOptions.RemoveEmptyEntries),
                         currentLine[6].Split(" ", StringSplitOptions.RemoveEmptyEntries),
                         ushort.TryParse(currentLine[3], out sParse) ? (sParse == 1) : (bool?)null));
-                    }
                     break;
                 case Constants.filleTitleBasics:
+                    if (currentLine[2].Contains(searchString, StringComparison.InvariantCultureIgnoreCase))
+                    {
                         Add(new TitleBasics(
                             currentLine[0],
                             currentLine[1],
@@ -90,6 +90,7 @@ namespace IMDBSearcher
                             ushort.TryParse(currentLine[6], out sParse) ? (currentSParse = sParse) : null,
                             byte.TryParse(currentLine[7], out bParse) ? (currentBParse = bParse) : null,
                             currentLine[8].Split("\\s+")));
+                    }
                     break;
                 case Constants.filleTitleCrew:
                     Add(new TitleCrew(

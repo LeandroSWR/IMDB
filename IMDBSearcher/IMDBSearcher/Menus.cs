@@ -61,9 +61,7 @@ namespace IMDBSearcher
             Console.WriteLine("|                                 |");
             Console.WriteLine("|  1. Titles                      |");
             Console.WriteLine("|                                 |");
-            Console.WriteLine("|  2. People                      |");
-            Console.WriteLine("|                                 |");
-            Console.WriteLine("|  3. Exit                        |");
+            Console.WriteLine("|  2. Exit                        |");
             Console.WriteLine("|_________________________________|");
 
             // Calls the Selection method which waits for input
@@ -81,23 +79,11 @@ namespace IMDBSearcher
                 // Asks for what the user wants to search
                 case ConsoleKey.D1:
 
-                    // Set the search mode to Titles
-                    searchSettings.SearchType = SearchType.Titles;
-
                     // Start asking the user for all search related parameters
                     AskForSearchParameters();
                     break;
                 // Closes the Console
                 case ConsoleKey.D2:
-
-                    // Set the search mode to People
-                    searchSettings.SearchType = SearchType.People;
-
-                    // Start asking the user for all search related parameters
-                    AskForSearchParameters();
-                    break;
-
-                case ConsoleKey.D3:
 
                     // Exit the application
                     Environment.Exit(0);
@@ -167,21 +153,16 @@ namespace IMDBSearcher
             // Save what the user wants to search for
             searchString = Console.ReadLine();
 
-            switch(searchSettings.SearchType)
+            titleBasics = new ImdbTable();
+
+            titleBasics.FillList(Constants.filleTitleBasics, searchSettings.TFilters, ref searchString);
+
+            // Clears the Console
+            Console.Clear();
+
+            foreach (TitleBasics tb in titleBasics)
             {
-                case SearchType.Titles:
-                    titleAkas = new ImdbTable();
-
-                    titleAkas.FillList(Constants.filleTitleAkas, searchSettings.TFilters, ref searchString);
-
-                    foreach (TitleAkas ta in titleAkas)
-                    {
-                        Console.WriteLine(ta.Title);
-                    }
-                    break;
-                case SearchType.People:
-
-                    break;
+                Console.WriteLine(tb.OriginalTitle);
             }
 
             Console.ReadLine();
@@ -199,27 +180,12 @@ namespace IMDBSearcher
             // WriteLines that print the filtering parameters
             Console.WriteLine("Select which filters you want to use.\n");
 
-            switch (searchSettings.SearchType)
-            {
-                case SearchType.Titles:
+            // List all the filters available
+            Console.WriteLine("\n1. Type\n2. Primary Title\n3. Adult\n" +
+                "4. Start Date\n5. End Date\n6. Genre\n\n0. Continue");
 
-                    // List all the filters available
-                    Console.WriteLine("\n1. Type\n2. Primary Title\n3. Adult\n" +
-                        "4. Start Date\n5. End Date\n6. Genre\n\n0. Continue");
-
-                    // Set the filter acording to player selection
-                    searchSettings.SetTitleFilters();
-                    break;
-                case SearchType.People:
-
-                    // List all the filters available
-                    Console.WriteLine("\n1. Name\n2. Birth Year\n3. Death Year\n" +
-                        "4. Value\n\n0. Continue");
-
-                    // Set the filter acording to player selection
-                    searchSettings.SetPeopleFilters();
-                    break;
-            }
+            // Set the filter acording to player selection
+            searchSettings.SetTitleFilters();
         }
 
         /// <summary>

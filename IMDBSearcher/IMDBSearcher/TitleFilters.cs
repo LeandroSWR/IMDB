@@ -34,29 +34,4 @@ namespace IMDBSearcher
         public ushort? EndDate { get => endDate; }
         public Genres?[] Genre { get => genre; }
     }
-
-    /// <summary>
-    /// Immutable Struct with all the People Filters
-    /// </summary>
-    struct PeopleFilters : IIsFilter
-    {
-        private readonly string name;
-        private readonly ushort? birthYear;
-        private readonly ushort? deathYear;
-        private readonly PrimaryProfessions?[] mainProfessions;
-
-        public PeopleFilters(string name, ushort? birthYear, ushort? deathYear,
-            PrimaryProfessions?[] mainProfessions) : this()
-        {
-            this.name = name;
-            this.birthYear = birthYear;
-            this.deathYear = deathYear;
-            this.mainProfessions = mainProfessions;
-        }
-
-        public string Name { get => name; }
-        public ushort? BirthYear { get => birthYear; }
-        public ushort? DeathYear { get => deathYear; }
-        public PrimaryProfessions?[] MainProfessions { get => mainProfessions; }
-    }
 }

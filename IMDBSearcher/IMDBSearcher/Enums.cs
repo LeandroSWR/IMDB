@@ -1,15 +1,6 @@
 ﻿namespace IMDBSearcher
 {
     /// <summary>
-    /// Enumerator for the Type of Search
-    /// </summary>
-    public enum SearchType
-    {
-        Titles,
-        People
-    }
-
-    /// <summary>
     /// Enumerator for the search parameters
     /// </summary>
     public enum Parameters
