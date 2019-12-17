@@ -37,7 +37,7 @@ namespace IMDBSearcher
             listFilter = new ListFilter();
 
             // Initialise the TitleBasics
-            TitleBasics = new ImdbTable(this);
+            TitleBasics = new ImdbTable();
         }
 
         /// <summary>

@@ -17,11 +17,10 @@ namespace IMDBSearcher
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             appName);
 
-        private Menus menu;
-
-        public ImdbTable(Menus menu) {
-            this.menu = menu;
-        }
+        /// <summary>
+        /// Constructor of IMDBTable
+        /// </summary>
+        public ImdbTable() { }
 
         private string[] currentLine;
 
