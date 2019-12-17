@@ -16,6 +16,15 @@ namespace IMDBSearcher
         private readonly ushort? endDate;
         private readonly Genres?[] genre;
 
+        /// <summary>
+        /// Constructor for TiteFilters
+        /// </summary>
+        /// <param name="type">Filter for type of title</param>
+        /// <param name="primaryTitle">Filter for the primary title</param>
+        /// <param name="adult">Filter for if it's adult only</param>
+        /// <param name="startDate">Filter for the year of release</param>
+        /// <param name="endDate">Filter for the year it ended</param>
+        /// <param name="genre">Filter for up to 3 genres</param>
         public TitleFilters(TitleType type, string primaryTitle, bool? adult, 
             ushort? startDate, ushort? endDate, Genres?[] genre) : this()
         {

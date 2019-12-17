@@ -4,6 +4,9 @@ using System.Text;
 
 namespace IMDBSearcher
 {
+    /// <summary>
+    /// Responsible for setting up all search settings and parameters
+    /// </summary>
     class SearchSettings
     {
         // Declare an Instance for the Menus

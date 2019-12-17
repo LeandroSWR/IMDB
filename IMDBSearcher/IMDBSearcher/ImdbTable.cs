@@ -5,6 +5,10 @@ using System.IO.Compression;
 
 namespace IMDBSearcher
 {
+    /// <summary>
+    /// Reads the file and saves all necessary data in it self
+    /// Lists all the titles
+    /// </summary>
     class ImdbTable : List<object>
     {
         private const string appName = "MyIMDBSearcher";

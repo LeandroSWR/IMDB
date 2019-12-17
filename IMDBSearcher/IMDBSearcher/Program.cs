@@ -2,6 +2,9 @@
 
 namespace IMDBSearcher
 {
+    /// <summary>
+    /// Starts the program
+    /// </summary>
     class Program
     {
         /// <summary>
