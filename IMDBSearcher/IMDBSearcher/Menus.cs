@@ -162,7 +162,7 @@ namespace IMDBSearcher
 
             TitleBasics = new ImdbTable(this);
 
-            TitleBasics.FillList(Constants.filleTitleBasics, searchString);
+            TitleBasics.FillList(searchString);
 
             // Clears the Console
             Console.Clear();

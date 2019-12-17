@@ -24,17 +24,6 @@
     }
 
     /// <summary>
-    /// Enumerator for the People Order By
-    /// </summary>
-    public enum PeopleOrderBy
-    {
-        None,
-        Name,
-        BirthYear,
-        DeathYear
-    }
-
-    /// <summary>
     /// Enumerator with all the Title Types
     /// </summary>
     public enum TitleType
@@ -84,41 +73,5 @@
         Sci_Fi,
         Talk_Show,
         Film_Noir
-    }
-
-    public enum PrimaryProfessions
-    {
-        actor,
-        actress,
-        cinematographer,
-        composer,
-        director,
-        editor,
-        executive,
-        miscellaneous,
-        producer,
-        soundtrack,
-        stunts,
-        writer,
-        animation_department,
-        art_department,
-        art_director,
-        assistant_director,
-        camera_department,
-        casting_department,
-        casting_director,
-        costume_department,
-        costume_designer,
-        editorial_department,
-        make_up_department,
-        music_department,
-        production_designer,
-        production_manager,
-        set_decorator,
-        sound_department,
-        special_effects,
-        transportation_department,
-        visual_effects,
-        location_management
     }
 }
