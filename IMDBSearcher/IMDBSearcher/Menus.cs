@@ -36,6 +36,10 @@ namespace IMDBSearcher
         // Variable that works as a table of TitleRatings from a db with a single key
         private ImdbTable titleRatings;
 
+        // Create a new list filter
+        ListFilter listFilter;
+
+        
         /// <summary>
         /// The Class Empty Constructor
         /// </summary>
@@ -43,6 +47,9 @@ namespace IMDBSearcher
 
             // Initialize the Search Settings passing a reference to this script
             searchSettings = new SearchSettings(this);
+
+            // Initialize the list filter
+            listFilter = new ListFilter();
         }
 
         /// <summary>
@@ -160,9 +167,7 @@ namespace IMDBSearcher
             // Clears the Console
             Console.Clear();
 
-            ListFilter lf = new ListFilter();
-
-            TitleBasics = lf.SortList(searchSettings.TOrderBy, TitleBasics, titleRatings);
+            TitleBasics = listFilter.SortList(searchSettings.TOrderBy, TitleBasics, titleRatings);
 
             foreach (TitleBasics tb in TitleBasics)
             {
