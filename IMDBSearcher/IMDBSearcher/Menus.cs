@@ -19,10 +19,10 @@ namespace IMDBSearcher
         private ImdbTable nameBasics;
 
         // Variable that works as a table of TitleAkas from a db with a single key
-        public ImdbTable titleAkas { get; private set; }
+        public ImdbTable TitleAkas { get; private set; }
 
         // Variable that works as a table of TitleBasics from a db with a single key
-        private ImdbTable titleBasics;
+        public ImdbTable TitleBasics { get; private set; }
 
         // Variable that works as a table of TitleCrew from a db with a single key
         private ImdbTable titleCrew;
@@ -153,14 +153,18 @@ namespace IMDBSearcher
             // Save what the user wants to search for
             searchString = Console.ReadLine();
 
-            titleBasics = new ImdbTable();
+            TitleBasics = new ImdbTable();
 
-            titleBasics.FillList(Constants.filleTitleBasics, searchSettings.TFilters, ref searchString);
+            TitleBasics.FillList(Constants.filleTitleBasics, ref searchString);
 
             // Clears the Console
             Console.Clear();
 
-            foreach (TitleBasics tb in titleBasics)
+            ListFilter lf = new ListFilter();
+
+            TitleBasics = lf.SortList(searchSettings.TOrderBy, TitleBasics, titleRatings);
+
+            foreach (TitleBasics tb in TitleBasics)
             {
                 Console.WriteLine(tb.OriginalTitle);
             }

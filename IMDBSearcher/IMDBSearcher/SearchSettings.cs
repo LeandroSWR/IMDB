@@ -13,10 +13,6 @@ namespace IMDBSearcher
         private TitlesOrderBy tOrderBy;
         public TitlesOrderBy TOrderBy { get => tOrderBy; }
 
-        // What to order by if we're searching for People
-        private PeopleOrderBy pOrderBy;
-        public PeopleOrderBy POrderBy { get => pOrderBy; }
-
         // Filters if we're searching for Titles
         public TitleFilters TFilters { get; private set; }
 
@@ -93,8 +89,11 @@ namespace IMDBSearcher
                             "tvSpecial, tvMiniSeries, videoGame, video, tvShort, shortFilm");
                         Console.WriteLine("\nInput the type of title you want:");
 
+                        // Save the user input
+                        userInput = Console.ReadLine();
+
                         // Until the user chooses a valid option
-                    } while (!Enum.TryParse(Console.ReadLine(), out chosenType));
+                    } while (!Enum.TryParse(userInput, out chosenType) || userInput != backString);
 
                     // Set the values in a new filter struct
                     TFilters = new TitleFilters(

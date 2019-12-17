@@ -16,14 +16,14 @@ namespace IMDBSearcher
 
         private string[] currentLine;
 
-        private ushort? currentSParse = null;
-        private byte? currentBParse = null;
+        private ushort? currentSParse;
+        private byte? currentBParse;
         private int? currentIParse = null;
         private ushort sParse;
         private byte bParse;
         private int iParse;
 
-        public void FillList(string filePath, IIsFilter filter, ref string searchString)
+        public void FillList(string filePath, ref string searchString)
         {
             byte b = 0;
             try
@@ -38,7 +38,7 @@ namespace IMDBSearcher
                             {
                                 currentLine = unzip.ReadLine().Split("\t");
                                 if (b != 0)
-                                    SaveFileData(filter, ref searchString, ref filePath);
+                                    SaveFileData(ref searchString, ref filePath);
                                 else
                                     b++;
                             }
@@ -52,7 +52,7 @@ namespace IMDBSearcher
             }
         }
 
-        private void SaveFileData(IIsFilter filter, ref string searchString, ref string filePath)
+        private void SaveFileData(ref string searchString, ref string filePath)
         {
             switch (filePath)
             {

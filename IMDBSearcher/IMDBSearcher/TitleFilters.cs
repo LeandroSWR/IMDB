@@ -7,7 +7,7 @@ namespace IMDBSearcher
     /// <summary>
     /// Immutable Struct with all the Title Filters
     /// </summary>
-    struct TitleFilters : IIsFilter
+    struct TitleFilters
     {
         private readonly TitleType type;
         private readonly string primaryTitle;
