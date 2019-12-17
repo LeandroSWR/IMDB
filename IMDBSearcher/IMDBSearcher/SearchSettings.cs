@@ -68,7 +68,7 @@ namespace IMDBSearcher
         /// <summary>
         /// Set's all the filters for Title Search based on user input
         /// </summary>
-        public void SetTitleFilters()
+        public void SetFilters()
         {
             switch (Console.ReadKey().Key)
             {

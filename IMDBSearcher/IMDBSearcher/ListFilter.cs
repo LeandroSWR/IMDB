@@ -58,6 +58,9 @@ namespace IMDBSearcher
         /// </summary>
         public ImdbTable SortList(SearchSettings searchSet, ImdbTable titleBasics)
         {
+            // Clear the temporary list
+            basicsTemp.Clear();
+
             for (int i = 0; i < titleBasics.Count; i++)
             {
                 if (titleBasics[i] != null && titleBasics[i] is TitleBasics)
@@ -93,9 +96,11 @@ namespace IMDBSearcher
                     return titleBasics;
             }
 
+            titleBasics.Clear();
+
             for (int i = 0; i < basicsTemp.Count; i++)
             {
-                titleBasics[i] = basicsTemp[i];
+                titleBasics.Add(basicsTemp[i]);
             }
 
             return titleBasics;

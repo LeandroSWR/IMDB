@@ -14,27 +14,9 @@ namespace IMDBSearcher
 
         // Declare an Instance for the Search Settings
         private SearchSettings searchSettings;
-
-        // Variable that works as a table of NameBasics from a db with a single key
-        private ImdbTable nameBasics;
-
-        // Variable that works as a table of TitleAkas from a db with a single key
-        public ImdbTable TitleAkas { get; private set; }
-
+        
         // Variable that works as a table of TitleBasics from a db with a single key
         public ImdbTable TitleBasics { get; private set; }
-
-        // Variable that works as a table of TitleCrew from a db with a single key
-        private ImdbTable titleCrew;
-
-        // Variable that works as a table of TitleEpisode from a db with a single key
-        private ImdbTable titleEpisode;
-
-        // Variable that works as a table of TitlePrincipals from a db with a single key
-        private ImdbTable titlePrincipals;
-
-        // Variable that works as a table of TitleRatings from a db with a single key
-        private ImdbTable titleRatings;
 
         // Create a new list filter
         ListFilter listFilter;
@@ -50,6 +32,9 @@ namespace IMDBSearcher
 
             // Initialize the list filter
             listFilter = new ListFilter();
+
+            // Initialise the TitleBasics
+            TitleBasics = new ImdbTable(this);
         }
 
         /// <summary>
@@ -160,25 +145,190 @@ namespace IMDBSearcher
             // Save what the user wants to search for
             searchString = Console.ReadLine();
 
-            TitleBasics = new ImdbTable(this);
-
+            // Fill the list based on the search string
             TitleBasics.FillList(searchString);
-
-            // Clears the Console
-            Console.Clear();
 
             // Filter the list
             TitleBasics = listFilter.FilterTitles(searchSettings, TitleBasics);
 
+            // Displays the Filtered title list
+            DisplayFilteredList();
+        }
+
+        /// <summary>
+        /// Display the list (Already filtered)
+        /// </summary>
+        private void DisplayFilteredList()
+        {
+            // Clears the Console
+            Console.Clear();
+
+            // Goes trough each title on the list
             foreach (TitleBasics tb in TitleBasics)
             {
-                Console.WriteLine("  " + tb.OriginalTitle);
+                // Display it's name with a small left offset
+                Console.WriteLine("   " + tb.OriginalTitle);
             }
 
+            // Call SelectFromList
+            SelectFromList();
+        }
+
+        /// <summary>
+        /// Ask the user to select a title from the list
+        /// </summary>
+        private void SelectFromList()
+        {
+            // If nothing was found
+            if (TitleBasics.Count == 0)
+            {
+                // Allert the user
+                Console.WriteLine("Nothing was found with those parameters");
+
+                // Wait for input
+                Console.ReadLine();
+            }
+
+            // Saves the current cursor position
+            int currentPos = 0;
+
+            // Saves the current key input
+            ConsoleKey cKey;
+
+            // Set the cursor position to 0
+            Console.SetCursorPosition(0, currentPos);
+            Console.Write("->");
+
+            // Do..
+            do
+            {
+                cKey = Console.ReadKey().Key;
+
+                // If the user presses 'W' or 'Up Arrow'
+                if (cKey == ConsoleKey.W || cKey == ConsoleKey.UpArrow)
+                {
+                    if (currentPos != 0)
+                    {
+                        // Blank the previous down spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("  ");
+
+                        // Decrease the currentPos
+                        currentPos--;
+
+                        // Display an arrow on the new spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("->");
+                    } else
+                    {
+                        // Rewrite the current spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("  ");
+                    }
+                } // If the user presses 'S' or 'Down Arrow'
+                else if (cKey == ConsoleKey.S || cKey == ConsoleKey.DownArrow)
+                {
+                    if (currentPos != TitleBasics.Count - 1)
+                    {
+                        // Blank the previous up spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("  ");
+
+                        // Decrease the currentPos
+                        currentPos++;
+
+                        // Display an arrow on the new spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("->");
+                    } else
+                    {
+                        // Rewrite the current spot
+                        Console.SetCursorPosition(0, currentPos);
+                        Console.Write("->");
+                    }
+                } // If another key was pressed
+                else
+                {
+                    // Rewrite the current spot
+                    Console.SetCursorPosition(0, currentPos);
+                    Console.Write("->");
+                }
+
+            } while (cKey != ConsoleKey.Enter);
+
+            DisplayTitleProperties(currentPos);
+        }
+
+        /// <summary>
+        /// Displays the selected title
+        /// </summary>
+        /// <param name="selection">Index for the selected title</param>
+        private void DisplayTitleProperties(int selection)
+        {
+            // Clears the console
+            Console.Clear();
+
+            // Writes the title ID
+            Console.WriteLine("Tittle ID:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).TConst);
+
+            // Writes the type of title
+            Console.WriteLine("Tittle Type:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).TitleType);
+
+            // Writes the primary title of the video
+            Console.WriteLine("Primary Tittle:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).PrimaryTitle ?? @"\N");
+
+            // Writes the original title of the video
+            Console.WriteLine("Original Tittle:\t" + 
+                ((TitleBasics)TitleBasics[selection]).OriginalTitle ?? @"\N");
+
+            // Writes true or false if the video is Adult only
+            Console.WriteLine("isAdult:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).IsAdult);
+
+            // Writes the year in which the video was released
+            Console.WriteLine("Start Date:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).StartYear ?? @"\N");
+
+            // Writes the year the show was ended
+            Console.WriteLine("End Date:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).EndYear ?? @"\N");
+
+            // Writes the Runtime in minutes the video runs for
+            Console.WriteLine("Runtime:\t\t" + 
+                ((TitleBasics)TitleBasics[selection]).RuntimeMinutes ?? @"\N" + "minutes");
+
+            // Write "Genres on the console with 3 tabs"
+            Console.Write("Genres:\t\t\t");
+
+            // Write the Genres
+            if(((TitleBasics)TitleBasics[selection]).Genres != null)
+            {
+                // Go through all the genres the title has
+                for(int i = 0; i < ((TitleBasics)TitleBasics[selection]).Genres.Length; i++)
+                {
+                    // Write each one
+                    Console.Write(((TitleBasics)TitleBasics[selection]).Genres[i]);
+
+                    // If we're not on the last genre
+                    if (i != ((TitleBasics)TitleBasics[selection]).Genres.Length - 1)
+                    {
+                        // Place a comma
+                        Console.Write(", ");
+                    }
+                }
+            } else
+            {
+                // If there's no genres writes "\N"
+                Console.Write(@"\N");
+            }
+
+            // Wait for user input
             Console.ReadLine();
         }
 
-        
         /// <summary>
         /// Asks the user what search filters he wants to use
         /// </summary>
@@ -195,7 +345,7 @@ namespace IMDBSearcher
                 "4. Start Date\n5. End Date\n6. Genre\n\n0. Continue");
 
             // Set the filter acording to player selection
-            searchSettings.SetTitleFilters();
+            searchSettings.SetFilters();
         }
 
         /// <summary>
