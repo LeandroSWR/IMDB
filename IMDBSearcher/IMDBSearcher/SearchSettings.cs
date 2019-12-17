@@ -93,7 +93,7 @@ namespace IMDBSearcher
                         userInput = Console.ReadLine();
 
                         // Until the user chooses a valid option
-                    } while (!Enum.TryParse(userInput, out chosenType) || userInput != backString);
+                    } while (!Enum.TryParse(userInput, out chosenType) && userInput != backString);
 
                     // Set the values in a new filter struct
                     TFilters = new TitleFilters(
@@ -241,7 +241,7 @@ namespace IMDBSearcher
                     } while (numGenres == 0 || numGenres > 3);
 
                     // Type of title chosen by the user
-                    Genres?[] genres = new Genres?[numGenres];
+                    Genres?[] genres = new Genres?[3];
 
                     // Current chosen Genre
                     Genres chosenGenre;

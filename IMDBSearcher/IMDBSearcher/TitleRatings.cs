@@ -8,9 +8,9 @@ namespace IMDBSearcher
     {
         private readonly string tConst;
         private readonly float averageRating;
-        private readonly uint numVotes;
+        private readonly int numVotes;
 
-        public TitleRatings(string tConst, float averageRating, uint numVotes) : this()
+        public TitleRatings(string tConst, float averageRating, int numVotes) : this()
         {
             this.tConst = tConst;
             this.averageRating = averageRating;
@@ -19,6 +19,6 @@ namespace IMDBSearcher
 
         public string TConst { get => tConst; }
         public float AverageRating { get => averageRating; }
-        public uint NumVotes { get => numVotes; }
+        public int NumVotes { get => numVotes; }
     }
 }

@@ -12,7 +12,11 @@ namespace IMDBSearcher
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
             appName);
 
-        public ImdbTable() { }
+        private Menus menu;
+
+        public ImdbTable(Menus menu) {
+            this.menu = menu;
+        }
 
         private string[] currentLine;
 
@@ -23,7 +27,7 @@ namespace IMDBSearcher
         private byte bParse;
         private int iParse;
 
-        public void FillList(string filePath, ref string searchString)
+        public void FillList(string filePath, string searchString = null)
         {
             byte b = 0;
             try
@@ -38,7 +42,7 @@ namespace IMDBSearcher
                             {
                                 currentLine = unzip.ReadLine().Split("\t");
                                 if (b != 0)
-                                    SaveFileData(ref searchString, ref filePath);
+                                    SaveFileData(searchString, ref filePath);
                                 else
                                     b++;
                             }
@@ -52,7 +56,7 @@ namespace IMDBSearcher
             }
         }
 
-        private void SaveFileData(ref string searchString, ref string filePath)
+        private void SaveFileData(string searchString, ref string filePath)
         {
             switch (filePath)
             {
@@ -118,7 +122,7 @@ namespace IMDBSearcher
                     Add(new TitleRatings(
                         currentLine[0],
                         Convert.ToSingle(currentLine[1]),
-                        Convert.ToUInt16(currentLine[2])));
+                        Convert.ToInt32(currentLine[2])));
                     break;
             }
         }

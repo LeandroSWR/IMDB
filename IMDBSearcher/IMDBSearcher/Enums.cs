@@ -39,6 +39,7 @@
     /// </summary>
     public enum TitleType
     {
+        none,
         movie,
         tvMovie,
         tvSeries,

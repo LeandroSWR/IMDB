@@ -160,18 +160,19 @@ namespace IMDBSearcher
             // Save what the user wants to search for
             searchString = Console.ReadLine();
 
-            TitleBasics = new ImdbTable();
+            TitleBasics = new ImdbTable(this);
 
-            TitleBasics.FillList(Constants.filleTitleBasics, ref searchString);
+            TitleBasics.FillList(Constants.filleTitleBasics, searchString);
 
             // Clears the Console
             Console.Clear();
 
-            TitleBasics = listFilter.SortList(searchSettings.TOrderBy, TitleBasics, titleRatings);
+            // Filter the list
+            TitleBasics = listFilter.FilterTitles(searchSettings, TitleBasics);
 
             foreach (TitleBasics tb in TitleBasics)
             {
-                Console.WriteLine(tb.OriginalTitle);
+                Console.WriteLine("  " + tb.OriginalTitle);
             }
 
             Console.ReadLine();
